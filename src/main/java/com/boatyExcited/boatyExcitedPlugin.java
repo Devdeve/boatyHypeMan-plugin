@@ -189,6 +189,14 @@ public class boatyExcitedPlugin extends Plugin {
 		final ItemComposition itemComposition = itemManager.getItemComposition(id);
 		final String itemName = itemComposition.getName();
 
+        // --- Ownership filter ---
+        if (config.ownershipFilter()) {
+            int ownership = item.getOwnership();
+            if (ownership != TileItem.OWNERSHIP_NONE && ownership != TileItem.OWNERSHIP_SELF) {
+                return; // Skip non-owned items
+            }
+        }
+
 		String hiddenItems = "";
 		if (!config.dropCustomConfig()) {
 			hiddenItems = configManager.getConfiguration("grounditems", "hiddenItems");
