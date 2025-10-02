@@ -131,6 +131,17 @@ public interface boatyExcitedConfig extends Config {
         return "";
     }
 
+    @ConfigItem(
+            keyName = "ownershipFilter",
+            name = "Only play sound on my drops",
+            description = "Only play a sound when the item belongs to you",
+            position = 4,
+            section = drops
+    )
+    default boolean ownershipFilter()
+    {
+        return false; // default: off
+    }
 
     @ConfigItem(
             keyName = "announceLogin",
