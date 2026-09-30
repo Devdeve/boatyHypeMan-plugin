@@ -39,7 +39,6 @@ import net.runelite.client.audio.AudioPlayer;
 @PluginDescriptor(
 	name = "Boaty Hype man"
 )
-@PluginDependency(GroundItemsPlugin.class)
 public class boatyExcitedPlugin extends Plugin {
 	private static final String DELETE_WARNING_FILENAME = "EXTRA_FILES_WILL_BE_DELETED_BUT_FOLDERS_WILL_REMAIN";
 	private static final File DOWNLOAD_DIR = new File(RuneLite.RUNELITE_DIR.getPath() + File.separator + "boaty-excited");
@@ -55,8 +54,6 @@ public class boatyExcitedPlugin extends Plugin {
 	@Inject
 	private ItemManager itemManager;
 	private static final Random random = new Random();
-	@Inject
-	private GroundItemsConfig groundItemsConfig;
 	@Inject
 	private boatyExcitedConfig config;
 	@Inject
@@ -208,14 +205,14 @@ public class boatyExcitedPlugin extends Plugin {
 			return;
 
 		// Check notify value first as easiest to check
-		int notifyValue = 0;
+		long notifyValue = 0L;
 		if (!config.dropCustomConfig()) {
-			notifyValue = Integer.parseInt(configManager.getConfiguration("grounditems", "highValuePrice"));
+			notifyValue = Long.parseLong(configManager.getConfiguration("grounditems", "highValuePrice"));
 		} else {
 			notifyValue = config.dropAnnouncementValue();
 		}
         //Grab price, dependent on what is configured. GE by default.
-		int price = 0;
+		long price = 0L;
 		switch(config.dropAnnouncementType()){
 		    case STORE:
 		        price = itemComposition.getPrice();
